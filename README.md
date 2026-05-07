@@ -75,7 +75,7 @@ cmake --build build
 
 - Kết quả được hiển thị trực tiếp trên terminal:
     + Ciphertext/Plaintext cuối cùng: Được in ra dưới dạng một chuỗi nhị phân liên tục. Đây là dữ liệu quan trọng nhất để hệ thống CI đối chiếu kết quả.
-    + Thông tin bổ trợ: Chương trình hiển thị danh sách các Round Keys (từ $K_1$ đến $K_{16}$) được tạo ra từ khóa chính để hỗ trợ việc debug và theo dõi quá trình biến đổi dữ liệu.
+    + Thông tin bổ trợ: Chương trình hiển thị danh sách các Round Keys  được tạo ra từ khóa chính để hỗ trợ việc debug và theo dõi quá trình biến đổi dữ liệu.
     + TripleDES: Xuất ra kết quả sau khi đi qua 3 tầng biến đổi.
 
 ## 5. Padding đang dùng
@@ -126,7 +126,7 @@ Trước khi nộp, cần có:
 - `tests/` với ít nhất 5 test
 - có negative test cho `tamper` và `wrong key`
 - `logs/` có ít nhất 1 file minh chứng thật
-- không còn dòng `TODO_STUDENT`
+
 
 ## 10. Lưu ý về CI
 
@@ -135,7 +135,7 @@ CI sẽ **không chỉ kiểm tra file có tồn tại** mà còn kiểm tra:
 - các mục bắt buộc trong report
 - sự hiện diện của negative tests
 - có minh chứng trong `logs/`
-- repo **không còn placeholder `TODO_STUDENT`**
+- repo **không còn placeholder **
 
 Vì vậy repo starter này sẽ **chưa pass CI** cho tới khi sinh viên hoàn thiện nội dung.
 
