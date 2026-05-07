@@ -1,7 +1,26 @@
 #!/usr/bin/env bash
-# TODO_STUDENT: Hoàn thiện test round-trip encrypt -> decrypt.
-# Gợi ý: sau khi em viết thêm giải mã, cần kiểm tra decrypt(encrypt(plaintext)) = plaintext.
+
 set -euo pipefail
 
-echo "TODO_STUDENT: implement round-trip test"
-exit 0
+echo "===== Test 2: Encrypt-Decrypt Round-trip ====="
+
+cd "$(dirname "$0")/.."
+
+# Compile if not already compiled
+if [ ! -f des ]; then
+    g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des
+fi
+
+# Run encryption/decryption test
+OUTPUT=$(./des)
+
+echo "$OUTPUT"
+
+# Check both encryption and decryption results
+if echo "$OUTPUT" | grep -q "Match: YES"; then
+    echo "✓ Round-trip encryption/decryption test PASSED"
+    exit 0
+else
+    echo "✗ Round-trip encryption/decryption test FAILED"
+    exit 1
+fi
