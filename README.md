@@ -57,33 +57,36 @@ cmake --build build
 
 ## 3. Input / Đầu vào
 
-TODO_STUDENT: Mô tả rõ đầu vào của chương trình sau khi em hoàn thiện bài lab.
+- Chương trình được thiết kế để nhận dữ liệu trực tiếp từ stdin (bàn phím hoặc chuyển hướng file).
 
-Gợi ý nên nêu:
-- plaintext đang được nhập như thế nào
-- key đang được nhập như thế nào
-- chương trình nhận 1 block hay nhiều block
-- định dạng dữ liệu là chuỗi bit, chuỗi ký tự hay file
+- Chế độ (Mode): Người dùng nhập số nguyên từ 1 đến 4 để chọn giữa DES Encrypt/Decrypt hoặc TripleDES Encrypt/Decrypt.
+
+- Dữ liệu (Plaintext/Ciphertext): Nhập dưới dạng chuỗi bit nhị phân (ví dụ: 01100001...).
+
+- Khóa (Key):
+
++ Đối với DES: Nhập 01 chuỗi 64-bit nhị phân.
+
++ Đối với TripleDES: Nhập lần lượt 03 chuỗi khóa (K1, K2, K3), mỗi khóa 64-bit.
+
++ Số lượng Block: Chương trình hỗ trợ xử lý nhiều block. Nếu plaintext dài hơn 64 bit, nó sẽ tự động chia nhỏ để mã hóa tuần tự.
 
 ## 4. Output / Đầu ra
 
-TODO_STUDENT: Mô tả rõ đầu ra của chương trình.
-
-Gợi ý nên nêu:
-- ciphertext hiển thị ra sao
-- có in round keys hay không
-- có hỗ trợ giải mã hay không
-- với TripleDES thì đầu ra gồm những gì
+- Kết quả được hiển thị trực tiếp trên terminal:
+    + Ciphertext/Plaintext cuối cùng: Được in ra dưới dạng một chuỗi nhị phân liên tục. Đây là dữ liệu quan trọng nhất để hệ thống CI đối chiếu kết quả.
+    + Thông tin bổ trợ: Chương trình hiển thị danh sách các Round Keys (từ $K_1$ đến $K_{16}$) được tạo ra từ khóa chính để hỗ trợ việc debug và theo dõi quá trình biến đổi dữ liệu.
+    + TripleDES: Xuất ra kết quả sau khi đi qua 3 tầng biến đổi.
 
 ## 5. Padding đang dùng
 
-TODO_STUDENT: Giải thích cơ chế padding em dùng.
+- Cơ chế padding được áp dụng là Zero Padding.
 
-Gợi ý:
-- nếu plaintext dài hơn 64 bit thì chia block như thế nào
-- nếu thiếu bit thì pad bằng `0` ra sao
-- hạn chế của zero padding là gì
-- vì sao cách này chỉ phù hợp cho bài học nhập môn, không phải thiết kế an toàn hoàn chỉnh trong thực tế
++ Cơ chế: Nếu độ dài của plaintext không phải là bội số của 64, chương trình sẽ thêm các ký tự 0 vào cuối block cuối cùng cho đến khi đủ 64 bit.
+
++ Hạn chế: Zero padding gặp vấn đề về tính toàn vẹn dữ liệu nếu bản rõ ban đầu vốn đã kết thúc bằng các bit 0. Khi giải mã, người dùng sẽ không biết các bit 0 ở cuối là dữ liệu thật hay là bit được thêm vào.
+
++ Tính an toàn: Đây chỉ là phương pháp cơ bản phục vụ học tập. Trong thực tế, các chuẩn như PKCS#7 thường được sử dụng vì chúng lưu trữ thông tin về số lượng byte đã pad, giúp việc khôi phục bản rõ chính xác tuyệt đối.
 
 ## 6. Tests bắt buộc
 
